@@ -1,0 +1,354 @@
+/* --------- Global Reset & Base --------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  background: linear-gradient(to bottom, #1a1a1a, #000);
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
+/* --------- Container Styles --------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 80px 20px 20px; /* Ще більше збільшено верхній відступ для уникнення перекриття */
+  width: 100%;
+  max-width: 95%;
+  margin: auto;
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 650px;
+  }
+}
+
+/* --------- Logo & Subtitle --------- */
+.logo {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #c47500;
+  text-shadow: 0 0 12px #ffd900;
+  text-align: center;
+  margin-top: 40px;
+  white-space: nowrap; /* Додано, щоб уникнути розбиття на дві строки */
+}
+.subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 0 12px #000000c4;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 15px;
+  text-align: center;
+  white-space: nowrap !important; /* Додано !important для пріоритету */
+}
+
+/* --------- Buttons --------- */
+.btn {
+  width: 100%;
+  max-width: 400px;
+  margin: 15px 0;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #2b2929;
+  background: linear-gradient(to right, #b96702, #ffc400);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+.btn:hover {
+  transform: scale(1.02);
+}
+/* Light beam animation */
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0) 80%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  transform: skewX(-25deg);
+  animation: shine 4s linear infinite;
+}
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* --------- Back Button --------- */
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px; /* Повернуто на ліву сторону */
+  z-index: 1000;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
+}
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --------- Machine Page --------- */
+.watermark {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  font-size: 3rem; /* Зменшено розмір шрифту для мобільних */
+  font-weight: 800;
+  color: #fff;
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  animation: scroll-v 20s linear infinite;
+}
+
+@keyframes scroll-v {
+  from {
+    transform: translate(-50%, -100%);
+  }
+  to {
+    transform: translate(-50%, 100vh);
+  }
+}
+
+.machine-content {
+  margin-top: 80px;
+  width: 100%;
+  text-align: center;
+}
+.machine-content p {
+  font-size: 0.9rem;
+  color: #ccc;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.machine-content input[type="number"] {
+  width: 100% !important; /* Додано !important для пріоритету */
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background: #222;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.machine-content input[type="number"]::placeholder {
+  color: #888;
+}
+.machine-content .enter-btn {
+  margin-top: 10px;
+}
+
+/* --------- Error Display --------- */
+.error-container {
+  margin-top: 40px;
+  width: 100%;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+.error-code {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.error-msg {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #eee;
+}
+
+/* --------- Accordion Panels --------- */
+.accordion {
+  margin-top: 20px;
+  width: 100%;
+}
+.panel {
+  background: #222;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: #333;
+  cursor: pointer;
+}
+.panel-header span:first-child {
+  flex: 1;
+  text-align: center; /* Центруємо заголовок */
+}
+.panel-header .toggle-icon {
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+.panel-content {
+  display: none;
+  padding: 15px;
+  background: #111;
+  color: #ddd;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.panel-content p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+.panel-content .copy-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.panel-content .copy-icon {
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  margin-right: 10px;
+}
+.panel-content .collapse-btn {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  background: #444;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.panel-content .collapse-btn:hover {
+  background: #555;
+}
+/* назва елемента, в якому показуються fix/steps */
+.accordion-body {
+  white-space: pre-line;   /* переносить \n */
+  text-align: left;        /* вирівнює зліва */
+}
+/* --------- Hidden Utility --------- */
+.hidden {
+  display: none !important;
+}
+/* ловимо ПРЯМО текст у fix / steps, де б він не стояв */
+pre, .accordion-body, .error-text, .steps, [data-steps] {
+  white-space: pre-line !important;   /* \n → перенос */
+  text-align: left !important;        /* ліве вирівнювання */
+}
+.content-area {
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* --------- Mobile Styles --------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 100px 20px 20px; /* Збільшено верхній відступ для мобільних */
+  }
+  
+  .logo {
+    font-size: 2rem; /* Зменшено розмір для мобільних */
+  }
+  
+  .subtitle {
+    font-size: 0.8rem; /* Зменшено розмір для мобільних */
+    letter-spacing: 0.5px;
+  }
+  
+  .machine-content {
+    margin-top: 60px; /* Зменшено відступ для мобільних */
+  }
+  
+  .machine-content p {
+    font-size: 0.8rem; /* Зменшено розмір тексту */
+    margin-bottom: 15px;
+  }
+  
+  .machine-content input[type="number"] {
+    width: 100% !important;
+    max-width: 400px !important; /* Встановлено таку ж максимальну ширину, як у кнопки */
+    padding: 15px; /* Збільшено padding для кращого вигляду */
+    font-size: 1.1rem; /* Збільшено розмір шрифту */
+  }
+  
+  .btn {
+    max-width: 400px; /* Встановлено максимальну ширину для кнопок */
+    padding: 18px; /* Збільшено padding */
+  }
+  
+  .back-btn {
+    top: 10px; /* Зменшено відступ зверху */
+    left: 10px; /* Зменшено відступ зліва */
+    padding: 8px 12px; /* Збільшено padding */
+    font-size: 0.9rem; /* Збільшено розмір шрифту */
+  }
+} 
+
+/* --------- Fade Transitions --------- */
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-out {
+  animation: fade-out 0.2s forwards;
+}
+.fade-in {
+  animation: fade-in 0.2s forwards;
+} 

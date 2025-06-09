@@ -1,0 +1,15 @@
+{
+  "name": "vendpro-errors",
+  "version": "1.0.0",
+  "description": "Error guide for VendPro machines",
+  "main": "app.js",
+  "scripts": {
+    "start": "json-server --watch db.json --static ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}
